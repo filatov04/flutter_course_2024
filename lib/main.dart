@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(AuthorizationWidget());
+  runApp(LoginForm());
 }
 
-class AuthorizationWidget extends StatelessWidget{
+class LoginForm extends StatefulWidget{
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm>{
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _handleLogin(){
+    String phone = _phoneController.text;
+    String password = _passwordController.text;
+
+    print('Username: $phone');
+    print('Password: $password');
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,6 +46,7 @@ class AuthorizationWidget extends StatelessWidget{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         TextField(
+                          controller: _phoneController,
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -42,6 +59,8 @@ class AuthorizationWidget extends StatelessWidget{
                           ),
                         ),
                         TextField(
+                          obscureText: true,
+                          controller: _passwordController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -54,7 +73,7 @@ class AuthorizationWidget extends StatelessWidget{
                           ),
                         ),
                         ElevatedButton(
-                            onPressed: (){print('Clicked');},
+                            onPressed: (){_handleLogin();},
                             style: ElevatedButton.styleFrom(
                                 fixedSize: const Size(194, 50),
                                 backgroundColor: Color.fromRGBO(24, 127, 246, 1),
@@ -77,3 +96,4 @@ class AuthorizationWidget extends StatelessWidget{
     );
   }
 }
+
