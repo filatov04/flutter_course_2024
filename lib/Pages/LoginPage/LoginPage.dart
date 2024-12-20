@@ -1,28 +1,6 @@
 import 'package:flutter/material.dart';
-import './Pages/LoginPage/LoginPage.dart';
-import './Pages/MainPage/MainPage.dart';
 
-void main() {
-  runApp(const App());
-}
-
-class App extends StatelessWidget{
-  const App({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SOO_Platform_MISIS',
-      initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/' : (BuildContext context) => LoginForm(),
-        '/MainPage': (BuildContext context) => MainPage(),
-      },
-    );
-  }
-}
-
-/*class LoginForm extends StatefulWidget{
+class LoginForm extends StatefulWidget{
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -34,9 +12,11 @@ class _LoginFormState extends State<LoginForm>{
   void _handleLogin(){
     String phone = _phoneController.text;
     String password = _passwordController.text;
-
-    print('Username: $phone');
-    print('Password: $password');
+    if(phone == '78005553535' && password == 'example'){
+      Navigator.pushNamed(context, '/MainPage');
+      print('Username: $phone');
+      print('Password: $password');
+    }
   }
 
   @override
@@ -75,6 +55,9 @@ class _LoginFormState extends State<LoginForm>{
                               ),
                               hintStyle: TextStyle(fontSize: 20, color: Colors.black)
                           ),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black)
                         ),
                         TextField(
                           obscureText: true,
@@ -84,11 +67,16 @@ class _LoginFormState extends State<LoginForm>{
                             fillColor: Colors.white,
                             hintText: "Пароль",
                             hintStyle: TextStyle(fontSize: 20, color: Colors.black),
+
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                               borderSide: BorderSide.none,
                             ),
                           ),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black
+                          )
                         ),
                         ElevatedButton(
                             onPressed: (){_handleLogin();},
@@ -113,5 +101,4 @@ class _LoginFormState extends State<LoginForm>{
         )
     );
   }
-}*/
-
+}
