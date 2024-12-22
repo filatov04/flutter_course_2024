@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../pohuy_api/SooAPI.dart';
 
 class LoginForm extends StatefulWidget{
   @override
@@ -9,14 +10,23 @@ class _LoginFormState extends State<LoginForm>{
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _handleLogin(){
+  void _handleLogin() async{
     String phone = _phoneController.text;
     String password = _passwordController.text;
-    if(phone == '78005553535' && password == 'example'){
+    final api = SooProjectAPI('localhost:8000');
+    try {
+      final token = await api.authenticate(phone, password);
+      print('Success auth, token = $token');
       Navigator.pushNamed(context, '/MainPage');
-      print('Username: $phone');
-      print('Password: $password');
     }
+    catch (e) {
+      print('Bad auth');
+    }
+    // if(phone == '78005553535' && password == 'example'){
+    //   Navigator.pushNamed(context, '/MainPage');
+    //   print('Username: $phone');
+    //   print('Password: $password');
+    // }
   }
 
   @override
