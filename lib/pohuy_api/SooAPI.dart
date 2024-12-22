@@ -6,16 +6,22 @@ class SooProjectAPI {
 
   SooProjectAPI(this.url);
 
-  Future<String> authenticate(String login, String password) async {
+  Future<String> authenticate(String phone, String password) async {
     final body = {
-      'login': login,
+      'phone': phone,
       'password': password
     };
-    var response = await http.post(Uri.parse("$url/auth/login"), body: json.encode(body));
-    if (response.statusCode != 200) {
-      return "Bad auth"; // need fix
-    }
+    var response = await http.post(Uri.parse("$url/auth/login"),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: json.encode(body));
+
     var rJson = jsonDecode(response.body);
-    return rJson['access_token'];
+    if (response.statusCode == 200) {
+      return rJson['access_token'];
+    }
+    throw rJson['detail']['message'];
   }
 }
