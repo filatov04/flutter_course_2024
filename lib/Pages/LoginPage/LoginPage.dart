@@ -18,7 +18,7 @@ class _LoginFormState extends State<LoginForm>{
       final token = await api.authenticate(phone, password);
       final userInfo = await api.getUserInfo(token);
       final notesList = await api.getNotes(token, userInfo.dormId);
-      print(userInfo);
+      final floorsList = await api.getFloors(token, userInfo.dormId);
       Navigator.pushNamed(context, '/MainPage');
     }
     catch (e) {
