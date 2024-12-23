@@ -16,12 +16,15 @@ class _LoginFormState extends State<LoginForm>{
     final api = SooProjectAPI('http://10.0.2.2:8000');
     try {
       final token = await api.authenticate(phone, password);
-      print('Success auth, token = $token');
+      final userInfo = await api.getUserInfo(token);
+      final notesList = await api.getNotes(token, userInfo.dormId);
+      print(userInfo);
       Navigator.pushNamed(context, '/MainPage');
     }
     catch (e) {
       print(e);
     }
+
     // if(phone == '78005553535' && password == 'example'){
     //   Navigator.pushNamed(context, '/MainPage');
     //   print('Username: $phone');
