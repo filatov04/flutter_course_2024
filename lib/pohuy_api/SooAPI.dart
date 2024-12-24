@@ -153,9 +153,9 @@ class SooProjectAPI {
   Future<UserInfo> getUserInfo (String token) async {
     var response = await http.get(Uri.parse("$url/user/info"),
         headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
-    });
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        });
     var rJson = jsonDecode(response.body);
     if (response.statusCode == 200) {
       return UserInfo.fromJson(rJson);
@@ -165,10 +165,10 @@ class SooProjectAPI {
 
   Future<List<NoteSchema>> getNotes(String token, int dormId) async {
     var response = await http.get(Uri.parse("$url/notes/$dormId/get"),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      });
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        });
     if (response.statusCode == 200) {
       List<dynamic> decodedJson = jsonDecode(response.body);
       List<NoteSchema> notes = decodedJson.map((json) => NoteSchema.fromJson(json)).toList();
@@ -180,10 +180,10 @@ class SooProjectAPI {
 
   Future <List<FloorSchema>> getFloors(String token, int dormId) async {
     var response = await http.get(Uri.parse('$url/floors/$dormId/get'),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      });
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        });
 
     if (response.statusCode == 200) {
       List<dynamic> decodedJson = jsonDecode(response.body);
@@ -196,10 +196,10 @@ class SooProjectAPI {
 
   Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 3]) async {
     var response = await http.get(Uri.parse('$url/violations/$dormId/get?limit=$limit'),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      });
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        });
     if (response.statusCode == 200) {
       List<dynamic> decodedJson = jsonDecode(response.body);
       List<ViolationSchema> violations = decodedJson.map((json) => ViolationSchema.fromJson(json)).toList();
@@ -209,3 +209,4 @@ class SooProjectAPI {
     throw rJson['detail']['message'];
   }
 }
+
