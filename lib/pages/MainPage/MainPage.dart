@@ -40,7 +40,7 @@ class MainPage extends StatelessWidget{
               children: [
                 Employee(),
                 SizedBox(height: 20),
-                Last()
+                Last(token: token,)
               ],
             )
           ),
