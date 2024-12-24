@@ -193,4 +193,19 @@ class SooProjectAPI {
     var rJson = jsonDecode(response.body);
     throw rJson['detail']['message'];
   }
+
+  Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 3]) async {
+    var response = await http.get(Uri.parse('$url/violations/$dormId/get?limit=$limit'),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      });
+    if (response.statusCode == 200) {
+      List<dynamic> decodedJson = jsonDecode(response.body);
+      List<ViolationSchema> violations = decodedJson.map((json) => ViolationSchema.fromJson(json)).toList();
+      return violations;
+    }
+    var rJson = jsonDecode(response.body);
+    throw rJson['detail']['message'];
+  }
 }
