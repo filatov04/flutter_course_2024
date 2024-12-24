@@ -126,68 +126,61 @@ class FloorSchema {
   }
 }
 
-class SooProjectAPI {
-  final String url;
-
-  SooProjectAPI(this.url);
-
-  Future<UserInfo> getUserInfo (String token) async {
-    var response = await http.get(Uri.parse("$url/user/info"),
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $token",
-        });
-    var rJson = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      return UserInfo.fromJson(rJson);
-    }
-    throw rJson['detail']['message'];
+Future<UserInfo> getUserInfo (String token) async {
+  var response = await http.get(Uri.parse("http://10.0.2.2:8000/user/info"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      });
+  var rJson = jsonDecode(response.body);
+  if (response.statusCode == 200) {
+    return UserInfo.fromJson(rJson);
   }
-
-  Future<List<NoteSchema>> getNotes(String token, int dormId) async {
-    var response = await http.get(Uri.parse("$url/notes/$dormId/get"),
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $token",
-        });
-    if (response.statusCode == 200) {
-      List<dynamic> decodedJson = jsonDecode(response.body);
-      List<NoteSchema> notes = decodedJson.map((json) => NoteSchema.fromJson(json)).toList();
-      return notes;
-    }
-    var rJson = jsonDecode(response.body);
-    throw rJson['detail']['message'];
-  }
-
-  Future <List<FloorSchema>> getFloors(String token, int dormId) async {
-    var response = await http.get(Uri.parse('$url/floors/$dormId/get'),
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $token",
-        });
-
-    if (response.statusCode == 200) {
-      List<dynamic> decodedJson = jsonDecode(response.body);
-      List<FloorSchema> floors = decodedJson.map((json) => FloorSchema.fromJson(json)).toList();
-      return floors;
-    }
-    var rJson = jsonDecode(response.body);
-    throw rJson['detail']['message'];
-  }
-
-  Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 3]) async {
-    var response = await http.get(Uri.parse('$url/violations/$dormId/get?limit=$limit'),
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $token",
-        });
-    if (response.statusCode == 200) {
-      List<dynamic> decodedJson = jsonDecode(response.body);
-      List<ViolationSchema> violations = decodedJson.map((json) => ViolationSchema.fromJson(json)).toList();
-      return violations;
-    }
-    var rJson = jsonDecode(response.body);
-    throw rJson['detail']['message'];
-  }
+  throw rJson['detail']['message'];
 }
 
+Future<List<NoteSchema>> getNotes(String token, int dormId) async {
+  var response = await http.get(Uri.parse("http://10.0.2.2:8000/notes/$dormId/get"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      });
+  if (response.statusCode == 200) {
+    List<dynamic> decodedJson = jsonDecode(response.body);
+    List<NoteSchema> notes = decodedJson.map((json) => NoteSchema.fromJson(json)).toList();
+    return notes;
+  }
+  var rJson = jsonDecode(response.body);
+  throw rJson['detail']['message'];
+}
+
+Future <List<FloorSchema>> getFloors(String token, int dormId) async {
+  var response = await http.get(Uri.parse('http://10.0.2.2:8000/floors/$dormId/get'),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      });
+
+  if (response.statusCode == 200) {
+    List<dynamic> decodedJson = jsonDecode(response.body);
+    List<FloorSchema> floors = decodedJson.map((json) => FloorSchema.fromJson(json)).toList();
+    return floors;
+  }
+  var rJson = jsonDecode(response.body);
+  throw rJson['detail']['message'];
+}
+
+Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 3]) async {
+  var response = await http.get(Uri.parse('http://10.0.2.2:8000/violations/$dormId/get?limit=$limit'),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      });
+  if (response.statusCode == 200) {
+    List<dynamic> decodedJson = jsonDecode(response.body);
+    List<ViolationSchema> violations = decodedJson.map((json) => ViolationSchema.fromJson(json)).toList();
+    return violations;
+  }
+  var rJson = jsonDecode(response.body);
+  throw rJson['detail']['message'];
+}

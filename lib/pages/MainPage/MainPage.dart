@@ -5,6 +5,8 @@ import 'package:flutter_course_2024/entities/Last/Last.dart';
 class MainPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    final token = ModalRoute.of(context)?.settings.arguments as String;
+
     return MaterialApp(
       home:  Scaffold(
         appBar: AppBar(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../pohuy_api/SooAPI.dart';
+import './LoginApi/LoginApi.dart';
 
 class LoginForm extends StatefulWidget{
   @override
@@ -13,14 +13,9 @@ class _LoginFormState extends State<LoginForm>{
   void _handleLogin() async{
     String phone = _phoneController.text;
     String password = _passwordController.text;
-    final api = SooProjectAPI('http://10.0.2.2:8000');
     try {
-      final token = await api.authenticate(phone, password);
-      final userInfo = await api.getUserInfo(token);
-      final notesList = await api.getNotes(token, userInfo.dormId);
-      final floorsList = await api.getFloors(token, userInfo.dormId);
-      final violations = await api.getViolationsByDormId(token, userInfo.dormId);
-      Navigator.pushNamed(context, '/MainPage');
+      final token = await authenticate(phone, password);
+      Navigator.pushNamed(context, '/MainPage', arguments: token);
     }
     catch (e) {
       print(e);
