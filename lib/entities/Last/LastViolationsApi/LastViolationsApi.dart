@@ -6,8 +6,8 @@ class ViolationSchema {
   final String violatorName;
   final String violationType;
   final String description;
-  final int roomId;
-  final int dormId;
+  final int blockNumber;
+  final int roomNumber;
   final String witness;
   final String createdAt;
 
@@ -16,8 +16,8 @@ class ViolationSchema {
     required this.violatorName,
     required this.violationType,
     required this.description,
-    required this.roomId,
-    required this.dormId,
+    required this.blockNumber,
+    required this.roomNumber,
     required this.witness,
     required this.createdAt,
   });
@@ -28,15 +28,15 @@ class ViolationSchema {
       violatorName: json['violator_name'],
       violationType: json['violation_type'],
       description: json['description'],
-      roomId: json['room_id'],
-      dormId: json['dorm_id'],
+      blockNumber: json['block_number'],
+      roomNumber: json['room_number'],
       witness: json['witness'],
       createdAt: json['created_at'],
     );
   }
 }
 
-Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 3]) async {
+Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 5]) async {
   var response = await http.get(Uri.parse('http://10.0.2.2:8000/violations/$dormId/get?limit=$limit'),
       headers: {
         "Content-Type": "application/json",

@@ -2,11 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_2024/entities/Employee/Employee.dart';
 import 'package:flutter_course_2024/entities/Last/Last.dart';
 
-class MainPage extends StatelessWidget{
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    if (index == 0) {
+      print("Home clicked");
+    } else if (index == 1) {
+      print("Notifications clicked");
+    } else if (index == 2) {
+      print("Messages clicked");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final token = ModalRoute.of(context)?.settings.arguments as String;
-
     return MaterialApp(
       home:  Scaffold(
         appBar: AppBar(
@@ -40,12 +59,14 @@ class MainPage extends StatelessWidget{
               children: [
                 Employee(),
                 SizedBox(height: 20),
-                Last(token: token,)
+                Last(token: token)
               ],
             )
           ),
         ),
         bottomNavigationBar: NavigationBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: _onItemTapped,
           destinations: const <Widget>[
             NavigationDestination(
               selectedIcon: Icon(Icons.home),
