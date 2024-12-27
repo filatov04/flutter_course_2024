@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_2024/app/store/store.dart';
+import 'package:flutter_course_2024/main.dart';
+import 'package:provider/provider.dart';
 import './LoginApi/LoginApi.dart';
 
 class LoginForm extends StatefulWidget{
+  const LoginForm({super.key});
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -15,7 +19,9 @@ class _LoginFormState extends State<LoginForm>{
     String password = _passwordController.text;
     try {
       final token = await authenticate(phone, password);
-      Navigator.pushNamed(context, '/MainPage', arguments: token);
+      Provider.of<AppState>(context, listen: false).authenticate();
+      //Navigator.pushNamed(context, '/MainPage', arguments: token);
+      await LocalStorageService().saveToken(token);
     }
     catch (e) {
       print(e);

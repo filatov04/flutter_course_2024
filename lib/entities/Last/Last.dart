@@ -15,9 +15,9 @@ String formatName(String fullName) {
 }
 
 class Last extends StatelessWidget{
-  final String token;
+  final String? token;
 
-  const Last({super.key, required this.token});
+  Last({super.key, required this.token});
 
   @override
   Widget build(BuildContext context) {
