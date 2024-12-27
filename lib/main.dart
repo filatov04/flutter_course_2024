@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_course_2024/Pages/LoginPage/LoginPage.dart';
 import 'package:flutter_course_2024/Pages/MainPage/MainPage.dart';
-import 'package:flutter_course_2024/Pages/NotesFloorPage/NotesFloorPage.dart';
 import 'package:flutter_course_2024/app/store/store.dart';
+import 'package:flutter_course_2024/pages/NotesFloorPage/NotesFloorPage.dart';
 import 'package:provider/provider.dart';
 
 
@@ -74,8 +74,6 @@ class _MainScreenState extends State<MainScreen> {
       _token = token;
     });
   }
-
-
 
   void _onItemTapped(int index) {
     setState(() {

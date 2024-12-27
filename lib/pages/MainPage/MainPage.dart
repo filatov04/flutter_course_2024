@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  String? _token;
+  String _token = "";
 
   @override
   void initState() {
@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   Future<void> _loadToken() async {
     final token = await LocalStorageService().getToken();
     setState(() {
-      _token = token;
+      _token = token ?? "";
     });
   }
 
