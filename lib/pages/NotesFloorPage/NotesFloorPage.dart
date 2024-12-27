@@ -1,27 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_course_2024/entities/Notes/Notes.dart';
 
-class NotesFloorPage extends StatefulWidget {
-  @override
-  _NotesFloorPageState createState() => _NotesFloorPageState();
-}
-
-class _NotesFloorPageState extends State<NotesFloorPage> {
-  int _selectedIndex = 1;
-
-  void _onItemTapped(int index, String token) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    if (index == 0) {
-      Navigator.pushNamed(context, '/MainPage', arguments: token);
-
-    } else if (index == 1) {
-      print('Notes Floor pushed');
-      // Navigator.pushNamed(context, '/NotesFloorPage', arguments: token);
-    }
-  }
-
+class NotesFloorPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final token = ModalRoute.of(context)?.settings.arguments as String;
