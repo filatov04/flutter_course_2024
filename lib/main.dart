@@ -5,8 +5,6 @@ import 'package:flutter_course_2024/app/store/store.dart';
 import 'package:flutter_course_2024/pages/NotesFloorPage/NotesFloorPage.dart';
 import 'package:provider/provider.dart';
 
-
-
 class AppState extends ChangeNotifier {
   bool _isAuthenticated = false;
   bool get isAuthenticated => _isAuthenticated;

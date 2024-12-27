@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:flutter_course_2024/entities/Violations/ViolationsApi/ViolationsApi.dart';
+
 class ViolationSchema {
   final String documentType;
   final String violatorName;
@@ -36,7 +38,7 @@ class ViolationSchema {
   }
 }
 
-Future<List<ViolationSchema>> getViolationsByDormId(String? token, int dormId, [int limit = 5]) async {
+Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 5]) async {
   var response = await http.get(Uri.parse('http://10.0.2.2:8000/violations/$dormId/get?limit=$limit'),
       headers: {
         "Content-Type": "application/json",
@@ -46,6 +48,7 @@ Future<List<ViolationSchema>> getViolationsByDormId(String? token, int dormId, [
     String decodedString = utf8.decode(response.bodyBytes);
     List<dynamic> decodedJson = jsonDecode(decodedString);
     List<ViolationSchema> violations = decodedJson.map((json) => ViolationSchema.fromJson(json)).toList();
+
     return violations;
   }
   var rJson = jsonDecode(response.body);
