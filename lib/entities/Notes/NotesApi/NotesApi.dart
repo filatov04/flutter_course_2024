@@ -30,6 +30,7 @@ Future<List<NoteSchema>> getNotes(String token, int dormId) async {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
+        "Accept-Encoding": "utf-8",
       });
   if (response.statusCode == 200) {
     List<dynamic> decodedJson = jsonDecode(response.body);
