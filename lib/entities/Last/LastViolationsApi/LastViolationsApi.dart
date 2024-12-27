@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:flutter_course_2024/entities/Violations/ViolationsApi/ViolationsApi.dart';
+
 class ViolationSchema {
   final String documentType;
   final String violatorName;
@@ -46,6 +48,7 @@ Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [i
     String decodedString = utf8.decode(response.bodyBytes);
     List<dynamic> decodedJson = jsonDecode(decodedString);
     List<ViolationSchema> violations = decodedJson.map((json) => ViolationSchema.fromJson(json)).toList();
+
     return violations;
   }
   var rJson = jsonDecode(response.body);

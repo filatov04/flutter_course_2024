@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
             children: [
               Employee(),
               SizedBox(height: 20),
-              Last(token: _token)
+              Last(token: _token),
             ],
           )
         ),
