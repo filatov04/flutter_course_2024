@@ -26,12 +26,6 @@ class _LoginFormState extends State<LoginForm>{
     catch (e) {
       print(e);
     }
-
-    // if(phone == '78005553535' && password == 'example'){
-    //   Navigator.pushNamed(context, '/MainPage');
-    //   print('Username: $phone');
-    //   print('Password: $password');
-    // }
   }
 
   @override

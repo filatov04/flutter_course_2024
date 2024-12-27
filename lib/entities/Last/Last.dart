@@ -15,7 +15,7 @@ String formatName(String fullName) {
 }
 
 class Last extends StatelessWidget{
-  final String? token;
+  final String token;
 
   Last({super.key, required this.token});
 
