@@ -10,8 +10,16 @@ class AppState extends ChangeNotifier {
   bool _isAuthenticated = false;
   bool get isAuthenticated => _isAuthenticated;
 
+  int _selectedIndex = 0;
+  int get selectedIndex => _selectedIndex;
+
   void authenticate() {
     _isAuthenticated = true;
+    notifyListeners();
+  }
+
+  void setSelectedIndex(int index) {
+    _selectedIndex = index;
     notifyListeners();
   }
 }
@@ -57,7 +65,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  int _selectedIndex = 0;
   String _token = '';
 
   @override
@@ -75,20 +82,19 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
       _currentIndex = index;
     });
   }
 
   final List<Widget> _pages = [
     const MainPage(),
-    const FloorPage(),
     const NotesFloorPage(),
-
+    const FloorPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -115,14 +121,14 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       body: IndexedStack(
-        index: _currentIndex,
+        index: appState.selectedIndex,
         children: _pages,
       ),
       bottomNavigationBar: NavigationBar(
         height: 70,
         backgroundColor: Colors.transparent,
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (index) => _onItemTapped(index),
+        selectedIndex: _currentIndex,
+        onDestinationSelected: (index){_onItemTapped(index); appState.setSelectedIndex(index);},
         //surfaceTintColor: Colors.transparent,
         indicatorColor: Colors.transparent,
         destinations: const <Widget>[
