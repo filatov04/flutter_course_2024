@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_course_2024/Pages/FloorPage/FloorPage.dart';
 import 'package:flutter_course_2024/Pages/LoginPage/LoginPage.dart';
 import 'package:flutter_course_2024/Pages/MainPage/MainPage.dart';
 import 'package:flutter_course_2024/Pages/NotesFloorPage/NotesFloorPage.dart';
@@ -15,7 +16,6 @@ class AppState extends ChangeNotifier {
     _isAuthenticated = true;
     notifyListeners();
   }
-
 }
 
 void main() {
@@ -86,7 +86,9 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const MainPage(),
+    const FloorPage(),
     const NotesFloorPage(),
+
   ];
 
   @override
