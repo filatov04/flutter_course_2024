@@ -36,7 +36,7 @@ class ViolationSchema {
   }
 }
 
-Future<List<ViolationSchema>> getViolationsByDormId(String? token, int dormId, [int limit = 5]) async {
+Future<List<ViolationSchema>> getViolationsByDormId(String token, int dormId, [int limit = 5]) async {
   var response = await http.get(Uri.parse('http://10.0.2.2:8000/violations/$dormId/get?limit=$limit'),
       headers: {
         "Content-Type": "application/json",
